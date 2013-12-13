@@ -1,7 +1,13 @@
+
+
 class NetController < ApplicationController
   def index
     show
     # render :text => 'ok'
+  end
+
+  def am_alive
+    
   end
   
   def register
