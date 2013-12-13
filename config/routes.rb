@@ -1,10 +1,17 @@
 Htspot::Application.routes.draw do 
+  get "net/register_form"
   get "net/index"
-  match "/net/show" => "net#show", via: :get
+  match "/net/show/:network" => "net#show", via: :get
   match "/net/clear" => "net#clear", via: :get
   match "/net/register/*ip" => "net#register", 
-        :constraints => {ip: /.*/}, via: :get
-  match "/net/am_alive/*ip" => "net#register",
+        :constraints => {ip: /.*/}, via: :post
+        
+  match "/net/register" => "net#register", via: :post
+                 
+  match "/net/send_message" => "net#send_message", via: :post
+                 
+                 
+  match "/net/am_alive/*ip" => "net#am_alive",
         :constraints => {ip: /.*/}, via: :get
   
   # map.connect '/net/register/*ip', :controller => "net", :action => "register"

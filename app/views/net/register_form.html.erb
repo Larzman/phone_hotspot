@@ -1,0 +1,31 @@
+Register
+<br/>
+<%= form_tag("/net/register", method: "post") do %>
+  <%= label_tag(:ip, "IP:") %>
+  <%= text_field_tag(:ip) %>
+  <br/>
+  <%= label_tag(:name, "Name:") %>
+  <%= text_field_tag(:name) %>
+  <br/>  
+  <%= label_tag(:network, "Network:") %>
+  <%= text_field_tag(:network) %>
+  
+  <%= submit_tag("Submit") %>
+<% end %>
+
+<br/>
+<br/>
+Send message
+<%= form_tag("/net/send_message", method: "post") do %>
+  <%= label_tag(:network, "Network:") %>
+  <%= text_field_tag(:network) %>
+  <br/>  
+  <%= label_tag(:name, "Name:") %>
+  <%= text_field_tag(:name) %>
+  <br/>
+  <%= label_tag(:message, "Message:") %>
+  <%= text_area_tag(:message) %>
+  <%= submit_tag("Submit") %>
+<% end %>
+
+
