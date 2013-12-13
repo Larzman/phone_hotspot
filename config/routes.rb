@@ -4,6 +4,8 @@ Htspot::Application.routes.draw do
   match "/net/clear" => "net#clear", via: :get
   match "/net/register/*ip" => "net#register", 
         :constraints => {ip: /.*/}, via: :get
+  match "/net/am_alive/*ip" => "net#register",
+        :constraints => {ip: /.*/}, via: :get
   
   # map.connect '/net/register/*ip', :controller => "net", :action => "register"
   
