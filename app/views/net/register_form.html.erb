@@ -63,6 +63,16 @@ the message and also delete it from the database.
  <br/>
 <% end %>
 
+<br/>
+<br/>
+ Networks:
+<% @networks.each do |net| %>
+  <%= link_to net.name, :controller => 'net', :action => 'show',
+      :network => net.name %>
+  <br/>    
+<% end %>
+
+
 
 
 
