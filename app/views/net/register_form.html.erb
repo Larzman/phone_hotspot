@@ -1,5 +1,17 @@
-Register
+This page is just here to illustrate how the URLs work for the
 <br/>
+android hot spot and to aid an android developer in developing an app.
+<br/>
+once an app is developed the site can be changed to have more security etc.
+<br/>
+<br/>
+
+Register a phone. You should give a network name for which network that phone
+<br/>
+will belong to. Also give the phone a name. Don't put any spaces in the network 
+<br/>
+or name for now anyway. 
+</br/>
 <%= form_tag("/net/register", method: "post") do %>
   <%= label_tag(:ip, "IP:") %>
   <%= text_field_tag(:ip) %>
@@ -15,7 +27,11 @@ Register
 
 <br/>
 <br/>
-Send message
+Send message by name or IP. If name is provided, IP will be ignored.
+<br/>
+so use either IP or name and not both. 
+<br/>
+You will need to provide the network name the phone is on.
 <%= form_tag("/net/send_message", method: "post") do %>
   <%= label_tag(:network, "Network:") %>
   <%= text_field_tag(:network) %>
@@ -23,9 +39,33 @@ Send message
   <%= label_tag(:name, "Name:") %>
   <%= text_field_tag(:name) %>
   <br/>
+  <%= label_tag(:ip, "IP:") %>
+  <%= text_field_tag(:ip) %>
+  <br/>
   <%= label_tag(:message, "Message:") %>
   <%= text_area_tag(:message) %>
   <%= submit_tag("Submit") %>
 <% end %>
+
+<br/>
+<br/>
+Phones on the system, (refresh page to update).
+<br/>
+By clicking on a phone you will invoke the am_alive request.
+<br/>
+If that phone has a message waiting for it. It will display
+<br/>
+the message and also delete it from the database. 
+<br/>
+<% @phones.each do |ph| %>
+ Phone at IP <%= link_to ph.ip, :controller => 'net',
+                 :action => 'am_alive', :ip => ph.ip %> on network <%= ph.network.name %>
+ <br/>
+<% end %>
+
+
+
+
+
 
 

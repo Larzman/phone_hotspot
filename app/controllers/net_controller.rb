@@ -7,6 +7,7 @@ class NetController < ApplicationController
   end
 
   def register_form
+    @phones = Phone.all
     render :register_form
   end
 
