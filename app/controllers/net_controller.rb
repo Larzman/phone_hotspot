@@ -53,7 +53,7 @@ class NetController < ApplicationController
     net_name = params[:network]
     net_name = nil if net_name.strip.empty?
     net_name ||= 'none'
-    net = Network.first_or_create(:name => net_name)
+    net = Network.find_or_create_by_name(net_name)
     ph = net.phones.where(:ip => ip, :name => params[:name]).first
     unless ph
       ph = Phone.create(:ip => ip, :name => params[:name])
