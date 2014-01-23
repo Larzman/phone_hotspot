@@ -33,6 +33,20 @@ class NetController < ApplicationController
     render json: {:status => status}
   end
 
+  def am_alive_by_name
+    net = Network.where(:name => params[:net_name]).first
+    ph = net.phones.where(:name => params[:phone_name]).first if net
+    status = 'success'
+    status = 'not found' unless ph
+    content = {:status => status}
+    if ph.messages.count > 0
+      msg = ph.messages.first
+      content[:message] = msg.body.dup
+      msg.destroy
+    end
+    render json: content
+  end
+
   def am_alive    
     ph = Phone.where(:ip => params[:ip]).first
     status = 'success'
@@ -48,18 +62,25 @@ class NetController < ApplicationController
   
   def register
     # render :text => "register " + params[:ip].inspect
+    status = 'success'
     ip = params[:ip]
     ph = Phone.find_by_ip(ip)
     net_name = params[:network]
     net_name = nil if net_name.strip.empty?
     net_name ||= 'none'
     net = Network.find_or_create_by_name(net_name)
-    ph = net.phones.where(:ip => ip, :name => params[:name]).first
-    unless ph
+    ph = net.phones.where(:ip => ip).first
+    ph2 = net.phones.where(:name => params[:name]).first
+    if ph
+      status = 'error: ip in use'
+      p ph
+    elsif ph2
+      status = 'error: name in use'
+    else  
       ph = Phone.create(:ip => ip, :name => params[:name])
       net.phones << ph      
     end
-    render :text => 'success'
+    render :text => status
   end
   
   def show

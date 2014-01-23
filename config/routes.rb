@@ -9,7 +9,8 @@ Htspot::Application.routes.draw do
   match "/net/register" => "net#register", via: :post
                  
   match "/net/send_message" => "net#send_message", via: :post
-                 
+     
+  match "/net/am_alive_by_name/:net_name/:phone_name" => "net#am_alive_by_name", via: :get            
                  
   match "/net/am_alive/*ip" => "net#am_alive",
         :constraints => {ip: /.*/}, via: :get

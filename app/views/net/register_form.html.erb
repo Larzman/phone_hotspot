@@ -59,7 +59,9 @@ the message and also delete it from the database.
 <br/>
 <% @phones.each do |ph| %>
  Phone at IP <%= link_to ph.ip, :controller => 'net',
-                 :action => 'am_alive', :ip => ph.ip %> on network <%= ph.network.name %>
+                 :action => 'am_alive_by_name',
+                 :net_name => ph.network.name, 
+                 :phone_name => ph.name %> on network <%= ph.network.name %>
  <br/>
 <% end %>
 
