@@ -12,7 +12,8 @@ will belong to. Also give the phone a name. Don't put any spaces in the network
 <br/>
 or name for now anyway. 
 </br/>
-<%= form_tag("/net/register", method: "post") do %>
+<%= form_tag("/net/register", method: "post", 
+             authenticity_token: false) do %>
   <%= label_tag(:ip, "IP:") %>
   <%= text_field_tag(:ip) %>
   <br/>
