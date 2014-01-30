@@ -41,7 +41,7 @@ class NetController < ApplicationController
     content = {:status => status}
     if ph.messages.count > 0
       msg = ph.messages.first
-      content[:message] = msg.body.dup
+      content[:message] = msg.body.to_s
       msg.destroy
     end
     render json: content
@@ -54,7 +54,7 @@ class NetController < ApplicationController
     content = {:status => status}
     if ph.messages.count > 0
       msg = ph.messages.first
-      content[:message] = msg.body.dup
+      content[:message] = msg.body.to_s
       msg.destroy
     end
     render json: content
